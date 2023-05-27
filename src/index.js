@@ -36,7 +36,7 @@ app.use(frameguard({ action: "SAMEORIGIN" }));
 require("./db/mongoose");
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
-app.use(cookieParser());
+app.use(cookieParser("ClydeIsASquirrel"));
 
 //Session
 // const uri = process.env.MONGGO_DOMAIN;
@@ -54,6 +54,13 @@ app.use(
     secret: "ClydeIsASquirrel",
     resave: "false",
     saveUninitialized: "false",
+    cookie: {
+      maxAge: 18000000000,
+      secure:
+        process.env.NODE_ENV && process.env.NODE_ENV == "production"
+          ? true
+          : false,
+    },
     store: new MemcachedStore({
       servers: [process.env.MEMCACHIER_SERVERS],
       prefix: "_session_",

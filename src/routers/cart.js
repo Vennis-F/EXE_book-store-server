@@ -137,7 +137,7 @@ router.post("/", auth, authorize("customer"), async (req, res) => {
 //POST /cart (Add item to cart - not check cart item duplicated)
 router.post("/guest", async (req, res) => {
   let cart = req.session.cartGuest;
-  console.log("[request Session] ", req.session);
+  // console.log("[request Session] ", req.session);
   if (cart) console.log(req.session);
   console.log("cart", cart);
 
@@ -161,7 +161,6 @@ router.post("/guest", async (req, res) => {
     if (!cart || cart.items.length === 0) notCartItemDuplicated = true;
     else {
       notCartItemDuplicated = cart.items.every((item) => {
-        console.log(item.product._id, req.body.productId);
         return item.product._id !== req.body.productId;
       });
     }
@@ -171,8 +170,9 @@ router.post("/guest", async (req, res) => {
       uCartItemGuest(cart, req.body.productId, product.quantity, qNeed);
     } else {
       //Case: Cart item is not exist
-      addCartItemGuest(cart, product, qNeed);
       console.log("hihi");
+      addCartItemGuest(cart, product, qNeed);
+      console.log("hihi2");
     }
 
     //Fetch product information to product and id:

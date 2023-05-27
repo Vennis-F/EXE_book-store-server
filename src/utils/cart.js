@@ -87,9 +87,10 @@ const addCartItemGuest = (cart, product, qNeed) => {
   };
 
   console.log("-----");
-  console.log(cart);
+  console.log(cart, cartItem);
   if (!cart) return (cart.items = [cartItem]);
   else cart.items.push({ ...cartItem });
+  console.log("-----2");
 };
 
 //

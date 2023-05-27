@@ -26,7 +26,7 @@ const port = process.env.PORT || 6969;
 app.use(frameguard({ action: "SAMEORIGIN" }));
 require("./db/mongoose");
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
+app.use(cors({ credentials: true, origin: "*" }));
 
 //Session
 const uri = process.env.MONGGO_DOMAIN;
@@ -43,6 +43,7 @@ app.use(
       mongoUrl: uri, //YOUR MONGODB URL
       // ttl: 14 * 24 * 60 * 60,
       autoRemove: "native",
+      dbName: "Bookstore",
     }),
   })
 );

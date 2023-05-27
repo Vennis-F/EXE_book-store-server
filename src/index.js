@@ -127,15 +127,17 @@ app.get("/set_session", (req, res) => {
     like: "4550",
   };
 
-  return res.status(200).json({ status: "success" });
+  return res.status(200).json({ status: "success", ssId: req.session.id });
 });
 
 //set session
 app.get("/get_session", (req, res) => {
   //check session
   console.log(123);
-  if (req.session.User) {
-    return res.status(200).json({ status: "success", session: req.session });
+  if (req.session) {
+    return res
+      .status(200)
+      .json({ status: "success", session: req.session, ssId: req.session.id });
   }
   return res.status(200).json({ status: "error", session: "No session" });
 });

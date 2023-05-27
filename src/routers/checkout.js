@@ -148,6 +148,8 @@ router.post("/receive-inforamation", async (req, res) => {
       note: note?.trim(),
     };
     req.session.receiverInfo = receiverInfo;
+    req.session.save();
+    console.log(req.session);
 
     res.send(receiverInfo);
   } catch (error) {

@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const dotenv = require("dotenv");
@@ -28,6 +29,7 @@ app.use(frameguard({ action: "SAMEORIGIN" }));
 require("./db/mongoose");
 app.use(express.json());
 app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
+app.use(cookieParser());
 
 //Session
 const uri = process.env.MONGGO_DOMAIN;

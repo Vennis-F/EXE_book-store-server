@@ -26,7 +26,7 @@ const port = process.env.PORT || 6969;
 app.use(frameguard({ action: "SAMEORIGIN" }));
 require("./db/mongoose");
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "*" }));
+app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
 
 //Session
 const uri = process.env.MONGGO_DOMAIN;

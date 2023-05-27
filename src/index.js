@@ -34,34 +34,28 @@ app.use(
 );
 
 //Session
-// app.set("trust proxy", 1);
-// app.use(
-//   session({
-//     name: "random_session",
-//     secret: "Asu",
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       maxAge: 18000000000,
-//       secure: false,
-//       // secure: process.env.NODE_ENV === "production" ? true : false,
-//       httpOnly: true,
-//       path: "/",
-//       // sameSite: "none",
-//     },
-//     store: MongoStore.create({
-//       mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL
-//       // ttl: 14 * 24 * 60 * 60,
-//       autoRemove: "native",
-//       dbName: "Bookstore",
-//     }),
-//   })
-// );
+app.set("trust proxy", 1);
 app.use(
   session({
+    name: "random_session",
     secret: "Asu",
-    saveUninitialized: false,
     resave: false,
+    saveUninitialized: true,
+    proxy: true,
+    cookie: {
+      maxAge: 18000000000,
+      secure: true,
+      // secure: process.env.NODE_ENV === "production" ? true : false,
+      httpOnly: true,
+      path: "/",
+      // sameSite: "none",
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL
+      // ttl: 14 * 24 * 60 * 60,
+      autoRemove: "native",
+      dbName: "Bookstore",
+    }),
   })
 );
 

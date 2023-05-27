@@ -29,10 +29,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:5000",
-      "https://exe-books-store-frontend-cdk6tgn3d-vennis-f.vercel.app/",
-    ],
+    origin: "https://exe-books-store-frontend.vercel.app/",
   })
 );
 

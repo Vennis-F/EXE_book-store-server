@@ -147,7 +147,7 @@ router.post("/receive-inforamation", async (req, res) => {
       address: address.trim(),
       note: note?.trim(),
     };
-    req.session.receiverInfo = receiverInfo;
+    req.session.receiverInfo = JSON.stringify(receiverInfo);
     req.session.save();
     console.log(req.session);
 
@@ -167,7 +167,7 @@ router.post("/confirm", auth, authorize("customer"), async (req, res) => {
       "[Receiver Infor] ",
       req.session,
       req.session.cookie,
-      req.session.receiverInfo
+      JSON.stringify(req.session.receiverInfo)
     );
     if (!req.session.receiverInfo)
       return res

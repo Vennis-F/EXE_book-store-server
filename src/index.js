@@ -46,7 +46,7 @@ app.use(
   session({
     secret: "Asu",
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
       maxAge: 18000000000,
       secure:

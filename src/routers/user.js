@@ -32,6 +32,7 @@ router.post("/guest", async (req, res) => {
     items: [],
     user: userId,
   };
+  req.session.save();
   console.log("***********");
 
   try {

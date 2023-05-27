@@ -36,20 +36,16 @@ app.use(
 //Session
 app.use(
   session({
+    name: "random_session",
     secret: "Asu",
-    resave: true,
-    saveUninitialized: false,
+    resave: false,
+    saveUninitialized: true,
     cookie: {
-      // maxAge: 18000000000,
-      // secure: process.env.NODE_ENV === "production" ? true : false,
-      // httpOnly: true,
-      // sameSite: "none",
-      // domain: ".vercel.app",
-
-      sameSite: "none",
-      secure: true,
-      domain: "exe-books-store-frontend.vercel.app",
+      maxAge: 18000000000,
+      secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
+      path: "/",
+      // sameSite: "none",
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL

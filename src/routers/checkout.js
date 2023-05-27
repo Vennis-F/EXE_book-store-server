@@ -148,7 +148,9 @@ router.post("/receive-inforamation", async (req, res) => {
       note: note?.trim(),
     };
     req.session.receiverInfo = receiverInfo;
-    req.session.save();
+    req.session.save(function (err) {
+      return Promise.resolve();
+    });
     console.log("[Recevie Information API] ", {
       session: req.session,
       id: req.session.id,

@@ -23,7 +23,6 @@ const app = express();
 const port = process.env.PORT || 6969;
 
 //Config
-app.set("trust proxy", 1);
 app.use(frameguard({ action: "SAMEORIGIN" }));
 require("./db/mongoose");
 app.use(express.json());
@@ -35,7 +34,7 @@ app.use(
 );
 
 //Session
-
+// app.set("trust proxy", 1);
 app.use(
   session({
     name: "random_session",
@@ -44,7 +43,8 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 18000000000,
-      secure: process.env.NODE_ENV === "production" ? true : false,
+      secure: false,
+      // secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
       path: "/",
       // sameSite: "none",

@@ -40,11 +40,16 @@ app.use(
     resave: true,
     saveUninitialized: false,
     cookie: {
-      maxAge: 18000000000,
-      secure: process.env.NODE_ENV === "production" ? true : false,
-      httpOnly: true,
+      // maxAge: 18000000000,
+      // secure: process.env.NODE_ENV === "production" ? true : false,
+      // httpOnly: true,
+      // sameSite: "none",
+      // domain: ".vercel.app",
+
       sameSite: "none",
-      domain: ".vercel.app",
+      secure: true,
+      domain: "exe-books-store-frontend.vercel.app",
+      httpOnly: true,
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL

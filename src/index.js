@@ -44,7 +44,7 @@ app.use(
       secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
       sameSite: "none",
-      domain: "exe-books-store-frontend.vercel.app",
+      domain: ".vercel.app",
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL

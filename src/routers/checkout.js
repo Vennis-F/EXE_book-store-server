@@ -152,7 +152,7 @@ router.post("/receive-inforamation", async (req, res) => {
       type: "blog javascript",
       like: "4550",
     };
-    req.session.receiverInfo = receiverInfo;
+    req.session.cookie.receiverInfo = receiverInfo;
     req.session.save(function (err) {
       // session saved
       console.log("[session ERROR]", err);

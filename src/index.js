@@ -22,6 +22,12 @@ const feedbackRouter = require("./routers/feedback");
 const sliderRouter = require("./routers/slider");
 const customerRouter = require("./routers/customer");
 const dashboardRouter = require("./routers/dashboard");
+const memjs = require("memjs");
+const mc = memjs.Client.create(process.env.MEMCACHIER_SERVERS, {
+  failover: true, // default: false
+  timeout: 1, // default: 0.5 (seconds)
+  keepAlive: true, // default: false
+});
 const app = express();
 const port = process.env.PORT || 6969;
 

@@ -148,7 +148,10 @@ router.post("/receive-inforamation", async (req, res) => {
       note: note?.trim(),
     };
     req.session.receiverInfo = receiverInfo;
-    req.session.save();
+    req.session.save(function (err) {
+      // session saved
+      console.log("[session ERROR]", err);
+    });
     console.log(req.session);
 
     res.send(receiverInfo);

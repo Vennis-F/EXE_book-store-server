@@ -36,12 +36,15 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 18000000000,
-      secure: false,
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      httpOnly: true,
+      sameSite: "none",
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL
       // ttl: 14 * 24 * 60 * 60,
       autoRemove: "native",
+      dbName: "Bookstore",
     }),
   })
 );

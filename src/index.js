@@ -32,15 +32,15 @@ app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
 app.use(cookieParser());
 
 //Session
-const uri = process.env.MONGGO_DOMAIN;
-const store = new MongoDBStore({
-  uri,
-  collection: "sessions",
-  databaseName: "Bookstore",
-});
-store.on("error", function (error) {
-  console.log("[Session Mongodb store is running]", error);
-});
+// const uri = process.env.MONGGO_DOMAIN;
+// const store = new MongoDBStore({
+//   uri,
+//   collection: "sessions",
+//   databaseName: "Bookstore",
+// });
+// store.on("error", function (error) {
+//   console.log("[Session Mongodb store is running]", error);
+// });
 app.set("trust proxy", 1);
 app.use(
   session({
@@ -60,7 +60,7 @@ app.use(
     //   autoRemove: "native",
     //   dbName: "Bookstore",
     // }),
-    store,
+    // store,
   })
 );
 

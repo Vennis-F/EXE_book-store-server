@@ -147,17 +147,12 @@ router.post("/receive-inforamation", async (req, res) => {
       address: address.trim(),
       note: note?.trim(),
     };
-    req.session.User = {
-      website: "anonystick.com",
-      type: "blog javascript",
-      like: "4550",
-    };
-    req.session.cookie.receiverInfo = receiverInfo;
-    req.session.save(function (err) {
-      // session saved
-      console.log("[session ERROR]", err);
+    req.session.receiverInfo = receiverInfo;
+    req.session.save();
+    console.log("[Recevie Information API] ", {
+      session: req.session,
+      id: req.session.id,
     });
-    console.log({ session: req.session, session: req.session.id });
 
     res.send(receiverInfo);
   } catch (error) {
@@ -171,7 +166,10 @@ router.post("/receive-inforamation", async (req, res) => {
 router.post("/confirm", auth, authorize("customer"), async (req, res) => {
   try {
     //Check receiverInfor data exist
-    console.log({ session: req.session, session: req.session.id });
+    console.log("[Confirm API] ", {
+      session: req.session,
+      id: req.session.id,
+    });
 
     if (!req.session.receiverInfo)
       return res

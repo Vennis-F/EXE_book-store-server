@@ -161,6 +161,7 @@ router.post("/receive-inforamation", async (req, res) => {
 router.post("/confirm", auth, authorize("customer"), async (req, res) => {
   try {
     //Check receiverInfor data exist
+    console.log("[Receiver Infor] ", req.session.receiverInfo);
     if (!req.session.receiverInfo)
       return res
         .status(400)

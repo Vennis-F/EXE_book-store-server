@@ -134,6 +134,7 @@ app.get("/set_session", (req, res) => {
 app.get("/get_session", (req, res) => {
   //check session
   console.log(123);
+  req.session;
   if (req.session) {
     return res
       .status(200)

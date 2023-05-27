@@ -157,7 +157,7 @@ router.post("/receive-inforamation", async (req, res) => {
       // session saved
       console.log("[session ERROR]", err);
     });
-    console.log(req.session);
+    console.log({ session: req.session, session: req.session.id });
 
     res.send(receiverInfo);
   } catch (error) {
@@ -171,13 +171,8 @@ router.post("/receive-inforamation", async (req, res) => {
 router.post("/confirm", auth, authorize("customer"), async (req, res) => {
   try {
     //Check receiverInfor data exist
-    console.log(
-      "[Receiver Infor] ",
-      req.session,
-      req.session.cookie,
-      req.session.receiverInfo,
-      req.session.User
-    );
+    console.log({ session: req.session, session: req.session.id });
+
     if (!req.session.receiverInfo)
       return res
         .status(400)

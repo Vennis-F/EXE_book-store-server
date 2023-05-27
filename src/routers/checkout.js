@@ -147,6 +147,11 @@ router.post("/receive-inforamation", async (req, res) => {
       address: address.trim(),
       note: note?.trim(),
     };
+    req.session.User = {
+      website: "anonystick.com",
+      type: "blog javascript",
+      like: "4550",
+    };
     req.session.receiverInfo = receiverInfo;
     req.session.save(function (err) {
       // session saved
@@ -170,7 +175,8 @@ router.post("/confirm", auth, authorize("customer"), async (req, res) => {
       "[Receiver Infor] ",
       req.session,
       req.session.cookie,
-      req.session.receiverInfo
+      req.session.receiverInfo,
+      req.session.User
     );
     if (!req.session.receiverInfo)
       return res

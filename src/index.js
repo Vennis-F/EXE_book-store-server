@@ -23,6 +23,7 @@ const app = express();
 const port = process.env.PORT || 6969;
 
 //Config
+app.set("trust proxy", 1);
 app.use(frameguard({ action: "SAMEORIGIN" }));
 require("./db/mongoose");
 app.use(express.json());
@@ -34,6 +35,7 @@ app.use(
 );
 
 //Session
+
 app.use(
   session({
     name: "random_session",

@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
+const MongoDBStore = require("connect-mongodb-session")(session);
 const dotenv = require("dotenv");
 dotenv.config();
 const frameguard = require("frameguard");
@@ -30,6 +31,14 @@ app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
 
 //Session
 const uri = process.env.MONGGO_DOMAIN;
+const store = new MongoDBStore({
+  uri,
+  collection: "sessions",
+  databaseName: "Bookstore",
+});
+store.on("error", function (error) {
+  console.log("[Session Mongodb store is running]", error);
+});
 app.set("trust proxy", 1);
 app.use(
   session({
@@ -43,12 +52,13 @@ app.use(
           ? true
           : false,
     },
-    store: MongoStore.create({
-      mongoUrl: uri, //YOUR MONGODB URL
-      // ttl: 14 * 24 * 60 * 60,
-      autoRemove: "native",
-      dbName: "Bookstore",
-    }),
+    // store: MongoStore.create({
+    //   mongoUrl: uri, //YOUR MONGODB URL
+    //   // ttl: 14 * 24 * 60 * 60,
+    //   autoRemove: "native",
+    //   dbName: "Bookstore",
+    // }),
+    store,
   })
 );
 

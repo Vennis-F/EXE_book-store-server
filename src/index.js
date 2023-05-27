@@ -48,7 +48,7 @@ app.use(
       // secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
       path: "/",
-      // sameSite: "none",
+      sameSite: "none",
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGGO_DOMAIN, //YOUR MONGODB URL

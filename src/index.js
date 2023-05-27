@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const MemcachedStore = require("connect-memjs")(session);
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const MongoDBStore = require("connect-mongodb-session")(session);
@@ -44,25 +45,36 @@ app.use(cookieParser());
 app.set("trust proxy", 1);
 app.use(
   session({
-    secret: "Asu",
-    resave: true,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 18000000000,
-      secure:
-        process.env.NODE_ENV && process.env.NODE_ENV == "production"
-          ? true
-          : false,
-    },
-    // store: MongoStore.create({
-    //   mongoUrl: uri, //YOUR MONGODB URL
-    //   // ttl: 14 * 24 * 60 * 60,
-    //   autoRemove: "native",
-    //   dbName: "Bookstore",
-    // }),
-    // store,
+    secret: "ClydeIsASquirrel",
+    resave: "false",
+    saveUninitialized: "false",
+    store: new MemcachedStore({
+      servers: [process.env.MEMCACHIER_SERVERS],
+      prefix: "_session_",
+    }),
   })
 );
+// app.use(
+//   session({
+//     secret: "Asu",
+//     resave: true,
+//     saveUninitialized: false,
+//     cookie: {
+//       maxAge: 18000000000,
+//       secure:
+//         process.env.NODE_ENV && process.env.NODE_ENV == "production"
+//           ? true
+//           : false,
+//     },
+// store: MongoStore.create({
+//   mongoUrl: uri, //YOUR MONGODB URL
+//   // ttl: 14 * 24 * 60 * 60,
+//   autoRemove: "native",
+//   dbName: "Bookstore",
+// }),
+// store,
+//   })
+// );
 
 //Config express
 app.use("/user", userRouter);

@@ -135,9 +135,7 @@ app.get("/get_session", (req, res) => {
   //check session
   console.log(123);
   if (req.session.User) {
-    return res
-      .status(200)
-      .json({ status: "success", session: req.session.User });
+    return res.status(200).json({ status: "success", session: req.session });
   }
   return res.status(200).json({ status: "error", session: "No session" });
 });

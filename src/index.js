@@ -30,6 +30,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:5000" }));
 
 //Session
 const uri = process.env.MONGGO_DOMAIN;
+app.set("trust proxy", 1);
 app.use(
   session({
     secret: "Asu",
@@ -37,7 +38,10 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 18000000000,
-      secure: false,
+      secure:
+        process.env.NODE_ENV && process.env.NODE_ENV == "production"
+          ? true
+          : false,
     },
     store: MongoStore.create({
       mongoUrl: uri, //YOUR MONGODB URL

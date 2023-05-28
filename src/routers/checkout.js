@@ -203,7 +203,7 @@ router.post("/confirm", auth, authorize("customer"), async (req, res) => {
       gender,
       note,
     } = req.session.receiverInfo;
-    const noteMoMo = req.body.noteMoMo;
+    const noteMoMo = req?.body?.params?.noteMoMo;
     const order = new Order({
       owner: req.user._id,
       totalCost: cart.totalCost,

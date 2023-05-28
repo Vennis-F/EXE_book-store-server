@@ -166,14 +166,6 @@ orderSchema.pre("save", async function (next) {
 orderSchema.pre("save", async function (next) {
   try {
     const order = this;
-    console.log("---------");
-    console.log(
-      "order",
-      order.isModified("status"),
-      order.status,
-      order.status !== "success",
-      order["__v"]
-    );
     if (order.isModified("status") && order.status !== "success") {
       await order.populate("owner");
       let owner = order.owner;
@@ -337,40 +329,3 @@ orderSchema.pre("save", async function (next) {
 //Model
 const Order = mongoose.model("Order", orderSchema);
 module.exports = Order;
-
-// //Test
-// const order = new Order({
-//   owner: "123456789012345678901234",
-//   saler: "123456789012345678901234",
-//   receiverName: "Anh",
-//   gender:"M",
-//   address: "Can Tho",
-//   email: "Testing@gmail.com",
-//   phone: "0387897777878",
-//   items: [{
-//       title: " jgj ",
-//       quantity: 5,
-//       amount: 22.4,
-//       product: "123456789012345678901234",
-//     },
-//     {
-//       title: "cookie",
-//       quantity: 10,
-//       amount: 100,
-//       product: "123456789012345678901234",
-//     },
-//   ],
-// })
-
-// mongoose
-//     .connect("mongodb://127.0.0.1:27017/book-store", {
-//       autoIndex: false,
-//     })
-//     .then(() => console.log("DB mongodb connection is ON"))
-//     .catch(() => console.log("DB mongodb connection FAIL"))
-
-// const test = async () => {
-//   await order.save()
-// }
-
-// test()

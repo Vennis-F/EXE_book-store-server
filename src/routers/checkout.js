@@ -168,10 +168,14 @@ router.post("/receive-inforamation", async (req, res) => {
 router.post("/confirm", auth, authorize("customer"), async (req, res) => {
   try {
     //Check receiverInfor data exist
-    console.log("[Confirm API] ", {
-      session: req.session,
-      id: req.session.id,
-    });
+    console.log(
+      "[Confirm API] ",
+      {
+        session: req.session,
+        id: req.session.id,
+      },
+      req.body
+    );
 
     if (!req.session.receiverInfo)
       return res
@@ -199,7 +203,7 @@ router.post("/confirm", auth, authorize("customer"), async (req, res) => {
       gender,
       note,
     } = req.session.receiverInfo;
-    console.log(note);
+    const noteMoMo = req.body.noteMoMo;
     const order = new Order({
       owner: req.user._id,
       totalCost: cart.totalCost,
@@ -209,7 +213,7 @@ router.post("/confirm", auth, authorize("customer"), async (req, res) => {
       phone,
       email,
       gender,
-      note,
+      note: noteMoMo ? noteMoMo : note,
       status: "submitted",
     });
 
@@ -335,9 +339,6 @@ router.patch("/confirm/guest", async (req, res) => {
     //Decrease product quantity:
     let cart = req.session.cartGuest;
     await updateNewProductCartItem(cart);
-    console.log("------------------");
-    console.log(cart);
-    console.log("------------------");
 
     for (let i = 0; i < cart.items.length; i++) {
       const item = cart.items[i];

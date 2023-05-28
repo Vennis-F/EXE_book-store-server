@@ -60,14 +60,14 @@ router.post("/register", async (req, res) => {
     const user = new User({
       ...req.body,
       role: role._id,
-      status: false,
+      status: true,
     });
     await user.save();
 
     //Send email verify
-    const token = await user.generateToken();
-    const url = `http://localhost:5000/verify-account/${token}`;
-    verifyAccount(user.email, url);
+    // const token = await user.generateToken();
+    // const url = `http://localhost:5000/verify-account/${token}`;
+    // verifyAccount(user.email, url);
 
     //Create user
     res.status(201).send({
